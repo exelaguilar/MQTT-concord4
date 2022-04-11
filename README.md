@@ -81,7 +81,7 @@ With payloads of:
 * disarmed
 
 
-Sending keypresses to the Concord System:
+### Sending keypresses to the Concord System:
 
 * concord/keypress
 
@@ -98,6 +98,7 @@ You can leverage MQTT publish in Home Assistant if you use that.
 
 You can use a hex to decimal number and use that number as your payload (0x20 => 32; payload = 32)
 
+### Reading the Concord Keypad
 
 * concord/keypad
 
