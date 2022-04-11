@@ -503,6 +503,7 @@ class ConcordSvr(object):
             if len(lines) > 1:
                 display_text_message += " " + lines[1].strip()
             log.info("Latest touchpad display text: '" + display_text_message + "'")
+	    self.updateStateOnMQTT('keypad', display_text_message)
 
     def updatePartitionDeviceState(self, part_dev, part_key):
         if part_key not in self.parts:
@@ -850,7 +851,9 @@ class ConcordMQTT(object):
             elif value == 'disarm':
                 concord_interface.ArmDisarm(action='disarm')
                 logger("MQTT - Disarm System...")
-
+	if topic == 'concord/keypress':
+		concord_interface.send_key_press(code=[int(value)])
+		logger("MQTT - Sending Keypress...")
     # The callback for logging
     def on_log(self, client, userdata, level, buf):
         log.debug("MQTT LOG - " + str(buf))
