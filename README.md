@@ -80,6 +80,33 @@ With payloads of:
 * armed_away
 * disarmed
 
+
+* concord/keypress
+
+This topic allows you to send commands to the system. 
+
+Reference the KEYPRESS_CODES under concord_commands.py. 
+
+You can leverage MQTT publish in Home Assistant if you use that. 
+
+    service: mqtt.publish
+    service_data:
+      topic: concord/keypress
+      payload: 1
+
+You can use a hex to decimal number and use that number as your payload (0x20 => 32; payload = 32)
+
+
+* concord/keypad
+
+You can set up a sensor in Home Assistant to read the keypad and it will update every minute or with any keypress. 
+
+    sensor:
+      - platform: mqtt
+        name: "Concord Keypad"
+        state_topic: "concord/keypad"
+
+
 ## Notes
 
 The previous ST version supported 'loud' as an option for arming / disarming, but I didn't implement that as my panel doesn't support it anyways. If desired it could be added back as the payload for the various topics.
